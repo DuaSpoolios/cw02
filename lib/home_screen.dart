@@ -15,36 +15,58 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Recipe Book'),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.pink,
       ),
-      body: ListView.builder(
-        itemCount: recipes.length,
-        itemBuilder: (context, index) {
-          final recipe = recipes[index];
-          return Card(
-            margin: const EdgeInsets.all(8),
-            child: ListTile(
-              title: Text(recipe['name']),
-              trailing: Icon(
-                recipe['isFavorite'] ? Icons.favorite : Icons.favorite_border,
-                color: recipe['isFavorite'] ? Colors.red : null,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                'assets/cookingcat.png',
+                height: 180,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  '/details',
-                  arguments: {'recipe': recipe, 'index': index},
+            ),
+          ),
+
+          Expanded(
+            child: ListView.builder(
+              itemCount: recipes.length,
+              itemBuilder: (context, index) {
+                final recipe = recipes[index];
+                return Card(
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    title: Text(recipe['name']),
+                    trailing: Icon(
+                      recipe['isFavorite']
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: recipe['isFavorite'] ? Colors.red : null,
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/details',
+                        arguments: {'recipe': recipe, 'index': index},
+                      );
+                    },
+                  ),
                 );
               },
             ),
-          );
-        },
+          ),
+        ],
       ),
+
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.pink,
         icon: const Icon(Icons.star),
         label: const Text("View Favorites"),
-        onPressed: () => Navigator.pushNamed(context, '/favorites'),
+        onPressed: ()=> Navigator.pushNamed(context, '/favorites'),
       ),
     );
   }

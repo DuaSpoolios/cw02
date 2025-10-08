@@ -11,9 +11,8 @@ class RecipeBookApp extends StatefulWidget {
   const RecipeBookApp({super.key});
 
   @override
-  State<RecipeBookApp> createState() => _RecipeBookAppState();
+  State<RecipeBookApp> createState()=> _RecipeBookAppState();
 }
-
 class _RecipeBookAppState extends State<RecipeBookApp> {
   final List<Map<String, dynamic>> recipes = [
     {
@@ -63,7 +62,7 @@ class _RecipeBookAppState extends State<RecipeBookApp> {
         if (settings.name== '/details') {
           final args= settings.arguments as Map<String, dynamic>;
           return MaterialPageRoute(
-            builder: (context) => DetailsScreen(
+            builder: (context)=> DetailsScreen(
               recipe: args['recipe'],
               index: args['index'],
               onToggleFavorite: toggleFavorite,
